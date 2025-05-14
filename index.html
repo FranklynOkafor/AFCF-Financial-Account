@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AFCF Account</title>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <div class="container">
+        <section id="head">
+          <div class="logo">
+            <img src="./images/20250205_135545~2.jpg" alt="" />
+          </div>
+          <div class="nav">
+            <nav class="navbar">
+              <div class="toggle">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+              </div>
+              
+              <div class="nav-links">
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="record.html">Check Records</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </section>
+        <section class="main">
+          <div class="box">
+            <form id="yourForm">
+              <section>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" class="title" />
+              </section>
+
+              <section>
+                <label for="amount">Amount</label>
+                <input type="text" id="amount" name="amount" class="amount" />
+              </section>
+
+              <section>
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                  <option value="tithe">Tithe</option>
+                  <option value="others">Others</option>
+                  <option value="expenses">Expenses</option>
+                </select>
+              </section>
+
+              <section>
+                <input type="submit" class="submitBtn" />
+              </section>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>

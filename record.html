@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AFCF Account</title>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="screen">
+      <div class="container">
+        <section id="head">
+          <div class="logo">
+            <img src="./images/20250205_135545~2.jpg" alt="" />
+          </div>
+          <div class="nav">
+            <nav class="navbar">
+              <div class="toggle">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+              </div>
+
+              <div class="nav-links">
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="record.html">Check Records</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </section>
+        <section class="table">
+          <h1>Your Financial Records</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody id="recordsTableBody"></tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <script src="./js/record.js"></script>
+  </body>
+</html>
