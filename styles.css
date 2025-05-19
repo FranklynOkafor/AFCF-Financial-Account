@@ -61,8 +61,10 @@
 .toggle .bar {
   height: 3px;
   width: 100%;
-  background-color: white;
-  border-radius: 10px;
+  background-color: rgb(168, 168, 168);
+  border-radius: 10px;  
+  transition: 0.2s;
+
 }
 
 .cancel {
@@ -78,7 +80,7 @@
 .cancel .bar {
   height: 3px;
   width: 100%;
-  background-color: white;
+  background-color: rgb(168, 168, 168);
   border-radius: 10px;
   position: absolute;
   top: 50%;
@@ -114,7 +116,7 @@
 .toggle-button .bar {
   height: 3px;
   width: 100%;
-  background-color: white;
+  background-color: rgb(156, 156, 156);
   border-radius: 10px;
 }
 
@@ -166,6 +168,11 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+.date{
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
 .submitBtn {
   background-color: #6b55e2;
   color: white;
@@ -240,6 +247,12 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #e0e0e0;
 }
+td:last-child{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 p a {
   display: block;
@@ -253,7 +266,15 @@ p a:hover {
   text-decoration: underline;
 }
 
-
+.deleteBtn{
+  background-color: rgba(228, 17, 17, 0.829);
+  color: white;
+  padding: 0.5rem;
+  font-size: 16px;
+  border: 0;
+  border-radius: 1rem;
+  width: 90%;
+}
 
 
 

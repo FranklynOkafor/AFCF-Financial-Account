@@ -2,54 +2,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.querySelector(".toggle");
   const cancelButton = document.querySelector(".cancel");
   const navLinks = document.querySelector(".nav-links");
-  const submitBtn = document.querySelector(".submitBtn"); // Ensure this is inside
-
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, "0");
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const year = today.getFullYear();
-  const formattedDate = `${day}-${month}-${year}`;
-  const date = formattedDate;
-  console.log(date);
+  const recordsTableBody = document.getElementById("recordsTableBody");
+  const sortByDateButton = document.getElementById("sortByDate");
+  let sortOrder = 'desc'; // Default sorting order to newest first
 
   toggleButton.addEventListener("click", () => {
     navLinks.classList.toggle("active");
     toggleButton.classList.toggle("cancel");
   });
-  const recordsTableBody = document.getElementById("recordsTableBody"); // Make sure your table body has this ID
 
-  function displayRecords() {
-    const storedRecords = localStorage.getItem("financialRecords");
-    const records = storedRecords ? JSON.parse(storedRecords) : [];
-
-    // Clear any existing rows in the table
+  function displayRecords(recordsToSort) {
     if (recordsTableBody) {
       recordsTableBody.innerHTML = "";
 
-      if (records.length > 0) {
-        records.forEach((record) => {
+      if (recordsToSort.length > 0) {
+        recordsToSort.forEach((record) => {
           const row = recordsTableBody.insertRow();
-
-          // We are intentionally skipping the 'id' here
-
           const dateCell = row.insertCell();
           dateCell.textContent = record.date;
-
           const titleCell = row.insertCell();
           titleCell.textContent = record.title;
-
           const amountCell = row.insertCell();
           amountCell.textContent = record.amount;
-
           const categoryCell = row.insertCell();
           categoryCell.textContent = record.category;
-
-          // You can add more cells for other record details if needed
+          const deleteCell = row.insertCell();
+          deleteCell.innerHTML = "<button class='deleteBtn'>Delete</button>"
         });
       } else {
         const row = recordsTableBody.insertRow();
         const messageCell = row.insertCell();
-        messageCell.colSpan = 4; // Update colspan to reflect the removed 'ID' column
+        messageCell.colSpan = 4;
         messageCell.textContent = "No records found.";
       }
     } else {
@@ -59,52 +42,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Call the function to display records when the page loads
-  displayRecords();
+  function sortRecordsByDate(records, order = 'desc') { // Default to descending
+    return records.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      if (order === 'asc') {
+        return dateA - dateB; // Ascending order (oldest to newest)
+      } else {
+        return dateB - dateA; // Descending order (newest to oldest)
+      }
+    });
+  }
+
+  // Load and initially display records (newest first)
+  const storedRecords = localStorage.getItem("financialRecords");
+  let records = storedRecords ? JSON.parse(storedRecords) : [];
+  let sortedRecords = sortRecordsByDate(records, sortOrder);
+  displayRecords(sortedRecords);
+
+  // Add event listener for the sort button
+  if (sortByDateButton) {
+    sortByDateButton.addEventListener("click", () => {
+      sortOrder = sortOrder === 'desc' ? 'asc' : 'desc'; // Toggle between descending and ascending
+      sortedRecords = sortRecordsByDate(records, sortOrder);
+      displayRecords(sortedRecords);
+      sortByDateButton.textContent = `Sort by Date (${sortOrder === 'desc' ? 'Newest First' : 'Oldest First'})`;
+    });
+  } else {
+    console.warn('Sort by date button with ID "sortByDate" not found in records.html');
+  }
 });
-// document.addEventListener('DOMContentLoaded', () => {
-//   const recordsTableBody = document.getElementById('recordsTableBody'); // Make sure your table body has this ID
-
-//   function displayRecords() {
-//     const storedRecords = localStorage.getItem('financialRecords');
-//     const records = storedRecords ? JSON.parse(storedRecords) : [];
-
-//     // Clear any existing rows in the table
-//     if (recordsTableBody) {
-//       recordsTableBody.innerHTML = '';
-
-//       if (records.length > 0) {
-//         records.forEach(record => {
-//           const row = recordsTableBody.insertRow();
-
-//           const idCell = row.insertCell();
-//           idCell.textContent = record.id; // Display the ID
-
-//           const dateCell = row.insertCell();
-//           dateCell.textContent = record.date; // Display the Date
-
-//           const titleCell = row.insertCell();
-//           titleCell.textContent = record.title;
-
-//           const amountCell = row.insertCell();
-//           amountCell.textContent = record.amount;
-
-//           const categoryCell = row.insertCell();
-//           categoryCell.textContent = record.category;
-
-//           // You can add more cells for other record details if needed
-//         });
-//       } else {
-//         const row = recordsTableBody.insertRow();
-//         const messageCell = row.insertCell();
-//         messageCell.colSpan = 5; // Update colspan to include the new 'ID' and 'Date' columns
-//         messageCell.textContent = 'No records found.';
-//       }
-//     } else {
-//       console.error('Table body element with ID "recordsTableBody" not found in record.html');
-//     }
-//   }
-
-//   // Call the function to display records when the page loads
-//   displayRecords();
-// });
