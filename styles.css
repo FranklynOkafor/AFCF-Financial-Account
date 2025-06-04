@@ -207,11 +207,12 @@ body {
   font-family: sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  width: 100%;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -226,7 +227,7 @@ h1 {
 }
 
 table {
-  width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -403,8 +404,4 @@ p a:hover {
   }
 }
 
-/* @media (max-width: 500px){
-  .screen{
-    
-  }
-} */
+ 
