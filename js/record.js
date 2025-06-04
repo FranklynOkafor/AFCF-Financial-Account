@@ -29,16 +29,28 @@ function loadRecords() {
     .then((response) => response.json())
     .then((data) => {
       data.forEach((record) => {
-        console.log(
-          `${record._id}: ${record.date} - ${record.title}: ₦${record.amount} [${record.category}]`
-        );
-
+        // console.log(
+        //   `${record._id}: ${record.date} - ${record.title}: ₦${record.amount} [${record.category}]`
+        // );
+        
+        let newDate = record.date.slice(0,10)
+        
+        let day = newDate.slice(8,10)
+        if (day[0] == 0){
+          newDay = `0${Number(day)+1}`
+        }else if (day[0] > 0){
+          newDay = `${Number(day) + 1}`
+        }
+        
+      
+        newDate = newDate.slice(0, -2) + newDay;
+       
         const tableBody = document.querySelector("#recordsTableBody");
 
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td>${record.date}</td>
+            <td>${newDate}</td>
             <td>${record.title}</td>
             <td>₦${record.amount}</td>
             <td>${record.category}</td>
