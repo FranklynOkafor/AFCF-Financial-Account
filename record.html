@@ -32,8 +32,24 @@
             </nav>
           </div>
         </section>
+
         <section class="table">
-          <h1>Your Financial Records</h1>
+          <h1 id="pageTitle">AFCF FINANCIAL RECORDS</h1>
+          <section id="totals">
+            <div id="moneyInContainer">
+              <label for="input">Money In</label>
+              <section type="text" id="input" name="input">00000</section>
+            </div>
+            <div id="moneyInContainer">
+              <label for="output">Money Out</label>
+              <section type="text" id="output" name="output">00000</section>
+            </div>
+            <div id="moneyInContainer">
+              <label for="balance">Balance</label>
+              <section type="text" id="balance" name="balance">00000</section>
+            </div>
+            
+          </section>
           <table>
             <thead>
               <tr>
@@ -42,7 +58,6 @@
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Options</th>
-                
               </tr>
             </thead>
             <tbody id="recordsTableBody"></tbody>

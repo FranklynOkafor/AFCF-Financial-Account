@@ -223,9 +223,39 @@ body {
 
 h1 {
   text-align: center;
-  margin: 2rem 0rem;
+  margin: 2rem 0rem 1px 0;
   color: #555;
 }
+
+#totals{
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+#totals section{
+  max-width: 90px;
+  display:block;
+  padding: 5px;
+  border: none;
+  text-align: center;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 table {
   width: 100%;
@@ -275,8 +305,8 @@ p a:hover {
 .deleteBtn{
   background-color: rgba(228, 17, 17, 0.829);
   color: white;
-  padding: 0.5rem;
-  font-size: 16px;
+  padding: 0.5rem 0.2rem;
+  font-size: 13px;
   border: 0;
   border-radius: 1rem;
   width: 90%;
