@@ -146,6 +146,6 @@ async function balance() {
 
   document.querySelector("#output").innerHTML = `₦${expenses}`;
 
-  document.querySelector("#balance").innerHTML = `₦${input + expenses}`;
+  document.querySelector("#balance").innerHTML = `₦${input - expenses}`;
 }
 balance();
