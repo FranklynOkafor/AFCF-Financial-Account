@@ -184,14 +184,7 @@ function getWeeklySummary() {
         }
       }
 
-      // if (thisYear >= record)
     });
   });
 }
-// getWeeklySummary()
 
-// console.log(getLastWeeksMonday());
-
-// fetchRecords().then((result) =>{
-//   console.log(result)
-// })
