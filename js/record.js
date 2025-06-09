@@ -164,6 +164,8 @@ function getLastWeeksMonday() {
 function getWeeklySummary() {
   const tableBody = document.querySelector("#recordsTableBody");
   tableBody.innerHTML = "";
+  input = 0;
+  expenses = 0;
   const monday = getLastWeeksMonday();
   let weeksSummaryArray = [];
   fetchRecords().then((result) => {

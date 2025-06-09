@@ -242,7 +242,12 @@ h1 {
   border: none;
   padding: 10px;
   border-radius: 15px;
+  cursor: pointer;
+
 }
+
+
+
 
 table {
   width: 100%;
