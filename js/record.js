@@ -25,25 +25,32 @@ const calenderApiKey =
   "nyk_v0_xq1nwyLNjnKIVzlGKl09emFLYJeYH19dMtlyUv3EBKocmO5GGG1rvs7D5o7cuOw2";
 
 // LOAD RECORDS
-function loadRecords() {
-  fetch(getAPIurl)
-    .then((response) => response.json())
-    .then((data) => {
-      // data.forEach((record) => {
-      // console.log(
-      //   `${record._id}: ${record.date} - ${record.title}: ₦${record.amount} [${record.category}]`
-      // );
-      const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Oldest to newest
-      sorted.forEach((record) => addRecordToTable(record));
-      // });
-    })
-    .catch((error) => {
-      console.error("Error fetching records:", error);
-    });
+let input = 0;
+let expenses = 0;
+
+async function fetchRecords() {
+  try {
+    const response = await fetch(getAPIurl);
+    const data = await response.json();
+
+    const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const record_array = sorted.map((record) => ({
+      id: `${record._id}`,
+      date: `${getEditedDate(record)}`,
+      title: `${record.title}`,
+      amount: `${record.amount}`,
+      category: `${record.category}`,
+    }));
+
+    return record_array;
+  } catch (error) {
+    console.error("Error fetching records:", error);
+    return []; // return empty array on error
+  }
 }
 
-window.onload = loadRecords;
-function addRecordToTable(record) {
+function getEditedDate(record) {
   let newDate = record.date.slice(0, 10);
 
   let day = newDate.slice(8, 10);
@@ -54,13 +61,38 @@ function addRecordToTable(record) {
   }
 
   newDate = newDate.slice(0, -2) + newDay;
+  return newDate;
+}
+function loadRecords() {
+  // fetch(getAPIurl)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Oldest to newest
+  //     sorted.forEach(function (record) {
+  //       addRecordAndBalance(record);
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error fetching records:", error);
+  //   });
+  fetchRecords().then((result) => {
+    result.forEach((record) => {
+      addRecordAndBalance(record);
+    });
+  });
+}
+
+window.onload = loadRecords();
+
+function addRecordToTable(record) {
+  // getEditedDate(record);
 
   const tableBody = document.querySelector("#recordsTableBody");
 
   const row = document.createElement("tr");
 
   row.innerHTML = `
-            <td>${newDate}</td>
+            <td>${record.date}</td>
             <td>${record.title}</td>
             <td>₦${record.amount}</td>
             <td>${record.category}</td>
@@ -70,6 +102,23 @@ function addRecordToTable(record) {
           `;
 
   tableBody.appendChild(row);
+}
+
+function getCategory(record) {
+  return record.category;
+}
+function addRecordAndBalance(record) {
+  addRecordToTable(record);
+  if (getCategory(record) === "tithe" || getCategory(record) === "others") {
+    input += Number(record.amount);
+  } else if (getCategory(record) === "expenses") {
+    expenses += Number(record.amount);
+  }
+  document.querySelector("#input").innerHTML = `₦${input}`;
+
+  document.querySelector("#output").innerHTML = `₦${expenses}`;
+
+  document.querySelector("#balance").innerHTML = `₦${input - expenses}`;
 }
 
 // DELETE RECORDS
@@ -96,56 +145,53 @@ function deleteRecord(recordID) {
     });
 }
 
-function getCategory(record) {
-  return record.category;
+// CODE FOR LAST WEEK'S SUMMARY
+function getLastWeeksMonday() {
+  const today = new Date();
+  const currentDay = today.getDay();
+
+  const daysSinceMonday = currentDay === 0 ? 7 : currentDay;
+
+  const lastMonday = new Date(today);
+  lastMonday.setDate(today.getDate() - daysSinceMonday - 6);
+  const y = lastMonday.getFullYear();
+  const m = String(lastMonday.getMonth() + 1).padStart(2, "0");
+  const d = String(lastMonday.getDate()).padStart(2, "0");
+
+  return `${y}-${m}-${d}`;
 }
-async function getInput() {
-  let input = 0;
 
-  try {
-    const response = await fetch(getAPIurl);
-    const data = await response.json();
+function getWeeklySummary() {
+  const tableBody = document.querySelector("#recordsTableBody");
+  tableBody.innerHTML = "";
+  const monday = getLastWeeksMonday();
+  let weeksSummaryArray = [];
+  fetchRecords().then((result) => {
+    result.forEach((record) => {
+      const thisYear = Number(record.date.slice(0, 4));
+      const thisMonth = Number(record.date.slice(5, 7));
+      const day = Number(record.date.slice(8));
 
-    data.forEach((record) => {
-      if (getCategory(record) === "tithe" || getCategory(record) === "others") {
-        input += Number(record.amount);
+      const mondaysYear = Number(monday.slice(0, 4));
+      const mondaysMonth = Number(monday.slice(5, 7));
+      const mondaysDate = Number(monday.slice(8));
+
+      if (thisYear >= mondaysYear) {
+        if (thisMonth >= mondaysMonth) {
+          if (day >= mondaysDate) {
+            addRecordAndBalance(record);
+          }
+        }
       }
+
+      // if (thisYear >= record)
     });
-
-    return input; // ✅ returned after processing
-  } catch (error) {
-    console.error("Error fetching records:", error);
-    return 0; // fallback value
-  }
+  });
 }
-async function getExpenses() {
-  let expenses = 0;
+// getWeeklySummary()
 
-  try {
-    const response = await fetch(getAPIurl);
-    const data = await response.json();
+// console.log(getLastWeeksMonday());
 
-    data.forEach((record) => {
-      if (getCategory(record) === "expenses") {
-        expenses += Number(record.amount);
-      }
-    });
-
-    return expenses; // ✅ returned after processing
-  } catch (error) {
-    console.error("Error fetching records:", error);
-    return 0; // fallback value
-  }
-}
-
-async function balance() {
-  const input = await getInput();
-  const expenses = await getExpenses();
-
-  document.querySelector("#input").innerHTML = `₦${input}`;
-
-  document.querySelector("#output").innerHTML = `₦${expenses}`;
-
-  document.querySelector("#balance").innerHTML = `₦${input - expenses}`;
-}
-balance();
+// fetchRecords().then((result) =>{
+//   console.log(result)
+// })

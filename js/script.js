@@ -34,7 +34,7 @@ const deleteAPIurl =
 //     .then((response) => response.json())
 //     .then((data) => {
 //       data.forEach((record) => {
-        
+
 //         console.log(
 //           `${record._id}: ${record.date} - ${record.title}: ₦${record.amount} [${record.category}]`
 //         );
@@ -94,5 +94,3 @@ function deleteRecord(recordID) {
       console.error("Error deleting record:", error);
     });
 }
-
-

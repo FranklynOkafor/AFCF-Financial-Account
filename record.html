@@ -13,7 +13,11 @@
       <div class="container">
         <section id="head">
           <div class="logo">
-            <img src="./images/AFCF Logo.png" alt="AFCF logo" />
+            <a
+              href="https://franklynokafor.github.io/AFCF-Financial-Account/index.html"
+            >
+              <img src="./images/AFCF Logo.png" alt="AFCF logo" />
+            </a>
           </div>
           <div class="nav">
             <nav class="navbar">
@@ -33,6 +37,31 @@
           </div>
         </section>
 
+        <section id="sorting">
+          <section id="weekly">
+            <button class="weeklyTotal" onclick="getWeeklySummary()">
+              Last week's Summary
+            </button>
+          </section>
+          <section id="monthly">
+            <select name="month" id="month">
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <button class="monthlyTotal">Get Balance</button>
+          </section>
+        </section>
+
         <section class="table">
           <h1 id="pageTitle">AFCF FINANCIAL RECORDS</h1>
           <section id="totals">
@@ -48,8 +77,8 @@
               <label for="balance">Balance</label>
               <section type="text" id="balance" name="balance">00000</section>
             </div>
-            
           </section>
+
           <table>
             <thead>
               <tr>

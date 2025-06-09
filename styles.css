@@ -10,7 +10,7 @@
 }
 
 #head {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   display: flex;
   justify-content: space-between;
   padding: 0.6rem;
@@ -62,9 +62,8 @@
   height: 3px;
   width: 100%;
   background-color: rgb(168, 168, 168);
-  border-radius: 10px;  
+  border-radius: 10px;
   transition: 0.2s;
-
 }
 
 .cancel {
@@ -124,10 +123,9 @@
   justify-content: space-around;
 }
 
-.nav-links li{
+.nav-links li {
   list-style: none;
 }
-
 
 /* Form styling */
 
@@ -168,7 +166,7 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.date{
+.date {
   padding: 10px;
   border: 1px solid #ddd;
   font-size: 16px;
@@ -189,18 +187,6 @@ select:focus {
   background-color: #0056b3;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* record */
 
 body {
@@ -220,42 +206,43 @@ body {
   overflow-x: auto;
 }
 
-
 h1 {
   text-align: center;
-  margin: 2rem 0rem 1px 0;
+  margin: 1.25rem 0rem 1px 0;
   color: #555;
 }
 
-#totals{
+#totals {
   display: flex;
   padding: 10px;
   justify-content: space-around;
 }
 
-#totals section{
+#totals section {
   max-width: 90px;
-  display:block;
+  display: block;
   padding: 5px;
   border: none;
   text-align: center;
-  
 }
 
+#sorting {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  align-items: center;
+}
 
+#month {
+  margin-right: 5px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+#sorting button {
+  background: #cacaca;
+  border: none;
+  padding: 10px;
+  border-radius: 15px;
+}
 
 table {
   width: 100%;
@@ -264,7 +251,8 @@ table {
   margin-bottom: 20px;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -283,7 +271,7 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #e0e0e0;
 }
-td:last-child{
+td:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,7 +290,7 @@ p a:hover {
   text-decoration: underline;
 }
 
-.deleteBtn{
+.deleteBtn {
   background-color: rgba(228, 17, 17, 0.829);
   color: white;
   padding: 0.5rem 0.2rem;
@@ -311,79 +299,6 @@ p a:hover {
   border-radius: 1rem;
   width: 90%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -435,5 +350,3 @@ p a:hover {
     border-bottom: none;
   }
 }
-
- 
