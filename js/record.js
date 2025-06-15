@@ -97,7 +97,7 @@ function addRecordToTable(record) {
             <td>₦${record.amount}</td>
             <td>${record.category}</td>
             <td>
-              <button onclick="deleteRecord('${record._id}')" class='deleteBtn'>Delete</button>
+              <button onclick="deleteRecord('${record["id"]}')" class='deleteBtn'>Delete</button>
             </td>
           `;
 
@@ -119,6 +119,13 @@ function addRecordAndBalance(record) {
   document.querySelector("#output").innerHTML = `₦${expenses}`;
 
   document.querySelector("#balance").innerHTML = `₦${input - expenses}`;
+
+  const balance = Number((document.querySelector("#balance").innerHTML).slice(1));
+  // console.log(balance < 0)
+  if (balance < 0){
+    let data = document.querySelector("#balance")
+    data.style.color = 'red'
+  }
 }
 
 // DELETE RECORDS
@@ -161,9 +168,13 @@ function getLastWeeksMonday() {
   return `${y}-${m}-${d}`;
 }
 
-function getWeeklySummary() {
+function defaultSetting() {
   const tableBody = document.querySelector("#recordsTableBody");
   tableBody.innerHTML = "";
+}
+
+function getWeeklySummary() {
+  defaultSetting();
   input = 0;
   expenses = 0;
   const monday = getLastWeeksMonday();
@@ -185,8 +196,21 @@ function getWeeklySummary() {
           }
         }
       }
-
     });
   });
 }
 
+function getMonthlyStatement() {
+  defaultSetting();
+  input = 0;
+  expenses = 0;
+  let month = document.getElementById("month").value;
+  fetchRecords().then((result) => {
+    result.forEach((record) => {
+      let recordMonth = record.date.slice(5, 7);
+      if (month == recordMonth) {
+        addRecordAndBalance(record);
+      }
+    });
+  });
+}
